@@ -8,11 +8,11 @@
  * @size: the number of bytes to allocate
  *
  * Return: a pointer to the allocated memory.
- *	On error, NULL is returned and errno is set to
+ *	On error, NULL is returned and error is set to
  *	ENOMEM.
  *
  * Description: The memory returned is not initialized.
- *	If <siz>e is 0, then my_malloc() returns NULL.
+ *	If <size> is 0, then my_malloc() returns NULL.
  */
 void *my_malloc(size_t size)
 {
