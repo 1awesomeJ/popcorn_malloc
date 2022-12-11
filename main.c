@@ -7,7 +7,6 @@ int main(void)
 	int *my_int;
 	double *my_double;
 	char *my_char;
-	void *my_large;
 	int i;
 
 	printf("\n------------------------ MY STRING[%lu bytes] ------------------------\n", sizeof(char) * 27);
@@ -18,9 +17,16 @@ int main(void)
 	my_double = my_malloc(sizeof(double));
 	printf("\n------------------------ MY CHAR[%lu bytes] --------------------------\n", sizeof(char));
 	my_char = my_malloc(sizeof(char));
-	printf("\n------------------------ MY LARGE[%lu bytes] --------------------------\n", (size_t)ALLOC_SIZE);
-	my_large = my_malloc(ALLOC_SIZE);
+	printf("\n------------------------ 100,000 BYTES --------------------------\n");
+	my_malloc(100000);
+	printf("\n------------------------ 200,000 BYTES --------------------------\n");
+	my_malloc(200000);
+	printf("\n------------------------ 500,000 BYTES --------------------------\n");
+	my_malloc(500000);
+	printf("\n------------------------ 1,000,000 BYTES --------------------------\n");
+	my_malloc(1000000);
 	printf("\n----------------------------------------------------------------------\n");
+
 
 	/* check if malloc failed at any point */
 	if (!(my_string && my_int && my_double && my_char))
@@ -37,7 +43,6 @@ int main(void)
 	*my_int = 102404201;
 	*my_double = 12345.67890;
 	*my_char = '$';
-	(void)my_large;
 
 	printf("my_string -> %s\n", my_string);
 	printf("my_int -> %d\n", *my_int);
