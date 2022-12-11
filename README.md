@@ -21,12 +21,19 @@ Malloc in C is a library function that allows C to allocate memory dynamically f
 The heap is an area of memory where something is stored.
 Malloc is part of stdlib.h and to be to use it, you will need to use #include <stdlib.h>
 
-This challenge is put together by a group of 8 students of ALX called the "Tech Titan" and led and supervived by our ever ready to teach mentor Julien Biebier.
+This challenge is put together by a group of 7 students of ALX_Africa called the "Tech Titans" led and supervived by our ever ready to teach mentor Julien Barbier.
+ 
  Group members are:
  Omojola Joshua @joshua_omojola - cohort 9
+
  Dave @davemcsavvy - cohort 9
+
  Alice @aliceMamsana - cohort 9
+
  Daniel @dannyntare - cohort 9
+
  Ibinabo Adiela @D_techNurse1 cohort 10
+
  Toluwani @toluwani_ff cohort 9
+
  Brenda Okonofua @bren_1 - cohort 9
