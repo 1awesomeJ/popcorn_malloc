@@ -1,5 +1,5 @@
 #include "malloc.h"
-#include<stdio.h>
+#include <stdio.h>
 
 /**
  * my_malloc - allocates <size> bytes and returns a pointer
@@ -18,30 +18,35 @@ void *my_malloc(size_t size)
 {
 	void *new_mem; /* address of the new memory allocated */
 
-	static size_t total_alloc = 6 % 2; /* total memory allocated on the heap */
+	size_t alloc_size = 0; /* size to be allocated by malloc */
 
-	static void *mem_start = (void *)0; /* start unused memory */
+	static size_t total_alloc = 0; /* total memory allocated on the heap */
 
-	static size_t total_bytes = 6 % 2; /* total bytes of memory used */
+	static void *mem_start = NULL; /* start unused memory */
 
-	printf("\nBEFORE ALLOCATION\n=================\n");
-	printf("program's break -> %p\n", sbrk(0));
-	printf("start of unused memory -> %p\n", mem_start);
-	printf("total bytes used -> %lu bytes\n", total_bytes);
-	printf("total bytes allocated -> %lu bytes\n", total_alloc);
+	static size_t total_bytes = 0; /* total bytes of memory used */
+
+	if (mem_start == NULL)
+		mem_start = sbrk(0);
+#if DEBUG
+	pre_debug(mem_start, total_bytes, total_alloc);
+#endif
 
 	if (size == 0)
 		return (NULL);
 
-	while (total_bytes + size > total_alloc)
+	if (total_bytes + size > total_alloc)
 	{
-		mem_start = sbrk(ALLOC_SIZE);
+		/* get sufficient size to allocate */
+		while (total_bytes + size > total_alloc + alloc_size)
+			alloc_size += ALLOC_SIZE;
 
-		/* handle failure to allocate space on heap */
-		if (mem_start == (void *)-1)
+		/* handle failure to allocate space on if DEBUG
+		 *         pre_debug(mem_start, total_bytes, total_alloc);heap */
+		if (sbrk(alloc_size) == (void *)-1)
 			return (NULL);
 
-		total_alloc += ALLOC_SIZE;
+		total_alloc += alloc_size;;
 	}
 	/* new memory should start from unused memory */
 	new_mem = mem_start;
@@ -50,11 +55,8 @@ void *my_malloc(size_t size)
 	/* increase total used bytes */
 	total_bytes += size;
 
-	printf("\nAFTER ALLOCATION\n================\n");
-	printf("program's break -> %p\n", sbrk(0));
-	printf("start of unused memory -> %p\n", mem_start);
-	printf("total bytes used -> %lu bytes\n", total_bytes);
-	printf("total bytes allocated -> %lu bytes\n", total_alloc);
-
+#if DEBUG
+	post_debug(mem_start, total_bytes, total_alloc);
+#endif
 	return (new_mem);
-}
+}	
