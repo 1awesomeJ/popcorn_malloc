@@ -27,7 +27,7 @@ data = {
     "model": model,
     "prompt": prompt,
     "num_images": 1,
-    "size": "256x256",
+    "size": "1024x1024",
     "response_format": "url"
 }
 
